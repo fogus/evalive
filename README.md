@@ -1,14 +1,10 @@
 # evalive
 
-FIXME: write description
+various `eval` functions for Clojure
 
-## Usage
 
-FIXME: write
+![evalive](http://images.fogus.me/logos/evalive.png "0x14 eyes")
 
-## Installation
-
-FIXME: write
 
 ## License
 
