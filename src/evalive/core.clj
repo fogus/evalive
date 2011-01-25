@@ -42,10 +42,19 @@
     (evil (seq this) form)))
 
 
+
 (comment
   (evil '{a 100 b 2} '(* a b))
   (evil '[a 100 b 22] '(* a b))
   (evil (to-array '[a 200 b 5]) '(* a b))
+
+  (def frm '(+ a 1))
+  (def a 100)
+
+  (eval frm)
+
+  (let [a "something not a number"]
+    (eval frm))
 
   (eval 'x)
 ; blowed up
