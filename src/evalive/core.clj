@@ -41,7 +41,9 @@
   (evil [this form]
     (evil (seq this) form)))
 
-
+(defmacro destro [binds form]
+  `(let [~binds ~form]
+     (lexical-context)))
 
 (comment
   (evil '{a 100 b 2} '(* a b))
