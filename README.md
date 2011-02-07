@@ -8,6 +8,6 @@ various `eval` functions for Clojure
 
 ## License
 
-Copyright (C) 2010 FIXME
+Copyright (C) 2011 Fogus
 
 Distributed under the Eclipse Public License, the same as Clojure.
