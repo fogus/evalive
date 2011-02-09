@@ -1,6 +1,6 @@
 ;; by Fogus - Feb. 9, 2011
 ;;
-;; <http://github.com/evalive>
+;; <http://github.com/fogus/evalive>
 
 ; Copyright (c) Michael Fogus, 2010. All rights reserved.  The use
 ; and distribution terms for this software are covered by the Eclipse
