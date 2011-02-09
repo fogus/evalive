@@ -9,10 +9,10 @@ various `eval` functions for Clojure
 Examples
 --------
 
+    (use '[evalive.core :only (evil destro)])
+
 ### evil
 
-    (use '[evalive.core :only (evil)])
-    
     (evil '{message "Hello", place "Cleveland"}
           '(println message place))
     
