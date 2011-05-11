@@ -49,6 +49,10 @@ Add the following to your `pom.xml` file:
       <version>1.0.0</version>
     </dependency>
 
+### References
+
+- [debug-repl](https://github.com/GeorgeJahad/debug-repl)
+
 ## License
 
 Copyright (C) 2011 Fogus
