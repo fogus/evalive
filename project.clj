@@ -1,4 +1,4 @@
-(defproject evalive "1.0.0"
+(defproject evalive "1.0.1-SNAPSHOT"
   :description "Various eval functions and macros for Clojure"
   :dependencies [[org.clojure/clojure "1.3.0"]]
   :dev-dependencies [[lein-clojars "0.5.0-SNAPSHOT"]

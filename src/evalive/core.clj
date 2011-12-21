@@ -44,10 +44,27 @@
   *TODO* Explore the utility of a version that takes a map and returns the merge of the supplied
    map and the lexical bindings."
   []
-  (let [symbols (keys &env)]
+  (let [black-list (complement #{'&env '&form})
+        symbols (filter black-list (keys &env))]
+;;    (println symbols)
     (zipmap (map (fn [sym] `(quote ~sym))
                  symbols)
-            symbols)))
+            (map #(if-let [v (resolve %)]
+                    `(quote ~(symbol (str (.ns v)) (name (.sym v))))
+                    %)
+                 symbols))))
+
+(comment
+  (defn f [z]
+    (lexical-context))
+
+  (f 42)
+  
+  (defmacro m [x]
+    (lexical-context))
+
+  (m 32)
+)
 
 (defprotocol Evil
   "Defines the public interface to evilive's \"contextual eval\"&reg; facilities.  In a nutshell,
@@ -136,4 +153,31 @@
         '(println message place))
 
   ; Hello Cleveland
+
+  (letfn [(foo_internal [env x]
+            (evil env x))]
+    (foo_internal '{x 42} (quote x)))
+
+  (deffexpr foo [x]
+    (evil ))
+
+  (DEFUN IF (CONDITION T-VAL NIL-VAL)
+       (COND (CONDITION (EVAL T-VAL))
+             (T (EVAL NIL-VAL))))
+
+  (defn IF [condition T F]
+    (cond (evil (lexical-context)
+                condition)
+          (evil (lexical-context)
+                T)
+          :default
+          (evil (lexical-context)
+                F)))
+
+  (IF 'true 1 2)
+  (IF 'false 1 2)
+  (IF '(< 2 3) '(+ 1 2 3) :foo)
+  (IF '(> 2 3) '(+ 1 2 3) '(keyword x))
+  (let [x "bar"]
+    (IF '(> 2 3) '(+ 1 2 3) '(keyword x)))
 )
