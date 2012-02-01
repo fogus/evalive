@@ -27,6 +27,10 @@
   compile-time-lookup
   #(do `'~%))
 
+(def *maximum-evil*
+  "This defines if macros should provide maximum access."
+  false)
+
 ;; # Public API
 
 (defmacro lexical-context
