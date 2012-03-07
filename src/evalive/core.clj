@@ -27,7 +27,7 @@
   compile-time-lookup
   #(do `'~%))
 
-(def *maximum-evil*
+(def ^:dynamic *maximum-evil*
   "This defines if macros should provide maximum access."
   false)
 
