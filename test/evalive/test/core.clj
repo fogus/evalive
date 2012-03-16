@@ -1,5 +1,5 @@
 (ns evalive.test.core
-  (:use [evalive.core :only (lexical-context evil destro)] :reload-all)
+  (:use [evalive.core :only (lexical-context evil destro wtfn)] :reload-all)
   (:use [clojure.test]))
 
 (deftest test-evil-avec-maps
@@ -112,3 +112,12 @@
            (destro [a b [c d & e] :as Z]
                    [1 2 [3 4 5 6 7 8]])
            '[a b])))
+
+(defmacro square [x]
+  `(let [x# ~x] (* x# x#)))
+
+(deftest test-wtfn
+  (are [L R] (= L R)
+       [0 1 4 9 16] (map (wtfn square) (range 5))
+       true         ((wtfn clojure.core/and) true true 1 2 3 true)
+       false        ((wtfn clojure.core/and) true true 1 false 3 true)))

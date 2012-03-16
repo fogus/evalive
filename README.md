@@ -8,36 +8,76 @@ various `eval` functions for Clojure
 
 Examples
 --------
+```clojure
 
-    (use '[evalive.core :only (evil destro)])
+    (use '[evalive.core :only (evil destro wtfn)])
+```
 
 ### evil
+```clojure
 
     (evil '{message "Hello", place "Cleveland"}
           '(println message place))
     
     ; Hello Cleveland
+```
 
 ### destro
+```clojure
 
     (destro [message place] ["Hello" "Cleveland"])
     ;=> {vec__2438 [Hello Cleveland], message Hello, place Cleveland}
+```
 
 ### evil destro
-  
+```clojure
+
     (evil (destro [message place] ["Hello" "Cleveland"])
           '(println message place))
     
     ; Hello Cleveland
+```
 
-Getting
--------
+### wtfn
+```clojure
+
+    (def callable-and (wtf clojure.core.and))
+    
+    (callable-and true 1 2 3 {} true 42)
+    ;=> 42
+```
+
+### wtfn destro
+
+```clojure
+
+	(def destruction (wtfn destro))
+
+    (map #(apply destruction %)
+           [['[h & t] [1 2 3 4 5]]
+            ['[car cdr] [:first :rest]]
+            ['[a b [c d & e] :as Z] [1 2 [3 4 5 6 7 8]]]])
+    
+    ;=> ({vec__2220 [1 2 3 4 5], h 1, t (2 3 4 5)}
+         {vec__2223 [:first :rest], car :first, cdr :rest}
+         {vec__2226 [1 2 [3 4 5 6 7 8]],
+          a 1,
+          b 2,
+          vec__2227 [3 4 5 6 7 8],
+          c 3,
+          d 4,
+          e (5 6 7 8),
+          Z [1 2 [3 4 5 6 7 8]]})
+```
+
+Including
+---------
 
 ### Leiningen
 
 Modify your [Leiningen](http://github.com/technomancy/leiningen) dependencies to include [evalive](http://fogus.me/fun/evalive/):
 
-    :dependencies [[evalive "1.0.0"] ...]    
+    :dependencies [[evalive "1.1.0"] ...]    
 
 ### Maven
 
@@ -46,7 +86,7 @@ Add the following to your `pom.xml` file:
     <dependency>
       <groupId>evalive</groupId>
       <artifactId>evalive</artifactId>
-      <version>1.0.0</version>
+      <version>1.1.0</version>
     </dependency>
 
 ### References
@@ -55,6 +95,6 @@ Add the following to your `pom.xml` file:
 
 ## License
 
-Copyright (C) 2011 Fogus
+Copyright (C) 2011-2012 Fogus
 
 Distributed under the Eclipse Public License, the same as Clojure.

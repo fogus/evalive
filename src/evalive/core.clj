@@ -144,6 +144,40 @@
   `(let [~binds ~form]
      (lexical-context)))
 
+;;
+;; **Invoke a macro like a function - if you dare!**
+;; <pre>
+;;                   ______
+;;                .-"      "-.
+;;               /            \
+;;   _          |              |          _
+;;  ( \         |,  .-.  .-.  ,|         / )
+;;   > "=._     | )(__/  \__)( |     _.=" <
+;;  (_/"=._"=._ |/     /\     \| _.="_.="\_)
+;;         "=._ (_     ^^     _)"_.="
+;;             "=\__|IIIIII|__/="
+;;            _.="| \IIIIII/ |"=._
+;;  _     _.="_.="\          /"=._"=._     _
+;; ( \_.="_.="     `--------`     "=._"=._/ )
+;;  > _.="                            "=._ <
+;; (_/                                   \_)
+;;
+;; </pre>
+;;
+;; based off the the awesome `->fn` by
+;; the awesome [Alan Dipert](http://alan.dipert.org).
+;;
+
+(defmacro wtfn
+  "Takes a macro name and returns a function that
+  invokes the macro as if it were a function."
+  [macro-name]
+  `(fn [& args#]
+     (evil {}
+      (-> @#'~macro-name
+          (vary-meta dissoc :macro)
+          (apply nil nil args#)))))         ;nils are env and form
+
 (comment
   (evil '{message "Hello", place "Cleveland"}
         '(println message place))
@@ -184,4 +218,14 @@
   (IF '(> 2 3) '(+ 1 2 3) '(keyword x))
   (let [x "bar"]
     (IF '(> 2 3) '(+ 1 2 3) '(keyword x)))
+
+  (def destruction (wtfn destro))
+
+  (use 'clojure.pprint)
+
+  (pprint
+   (map #(apply destruction %)
+        [['[h & t] [1 2 3 4 5]]
+         ['[car cdr] [:first :rest]]
+         ['[a b [c d & e] :as Z] [1 2 [3 4 5 6 7 8]]]]))
 )
