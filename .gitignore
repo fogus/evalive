@@ -6,3 +6,4 @@ classes
 .lein-failures
 docs
 *.*~
+target
