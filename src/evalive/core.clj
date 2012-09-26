@@ -33,7 +33,17 @@
 
 ;; # Public API
 
-(defmacro lexical-context
+(defmacro lexical-context []
+  (let [globals (remove (comp :macro meta val) (ns-publics *ns*))
+        syms (mapcat keys [globals, &env])
+        entries (for [sym syms]
+                  [`(quote ~sym) sym])]
+    `(into {}
+           (for [[sym# value#] [~@entries]
+                 :when (not (fn? value#))]
+             [sym# value#]))))
+
+(defmacro ^:private old-lexical-context
   "When called, `lexical-context` returns a map of symbol -> value of the
    current lexical bindings where the call occurred.  For example:
 
