@@ -10,7 +10,8 @@
 ; agreeing to be bound by the terms of this license.  You must not
 ; remove this notice, or any other, from this software.
 (ns evalive.core
-  "Various eval functions and macros.")
+  "Various eval functions and macros."
+  (:require [fogus.lexical.chocolate :as lexical]))
 
 ;; ![evalive](http://images.fogus.me/logos/evalive.png "0x14 eyes")
 
@@ -32,53 +33,6 @@
   false)
 
 ;; # Public API
-
-(defmacro lexical-context []
-  (let [globals (remove (comp :macro meta val) (ns-publics *ns*))
-        syms (mapcat keys [globals, &env])
-        entries (for [sym syms]
-                  [`(quote ~sym) sym])]
-    `(into {}
-           (for [[sym# value#] [~@entries]
-                 :when (not (fn? value#))]
-             [sym# value#]))))
-
-(defmacro ^:private old-lexical-context
-  "When called, `lexical-context` returns a map of symbol -> value of the
-   current lexical bindings where the call occurred.  For example:
-
-    (let [a 1]
-      (let [b 2]
-        (lexical-bindings)))
-
-   returns
-
-    {a 1, b 2}
-
-  *TODO* Explore the utility of a version that takes a map and returns the merge of the supplied
-   map and the lexical bindings."
-  []
-  (let [black-list (complement #{'&env '&form})
-        symbols (filter black-list (keys &env))]
-;;    (println symbols)
-    (zipmap (map (fn [sym] `(quote ~sym))
-                 symbols)
-            (map #(if-let [v (resolve %)]
-                    `(quote ~(symbol (str (.ns v)) (name (.sym v))))
-                    %)
-                 symbols))))
-
-(comment
-  (defn f [z]
-    (lexical-context))
-
-  (f 42)
-  
-  (defmacro m [x]
-    (lexical-context))
-
-  (m 32)
-)
 
 (defprotocol Evil
   "Defines the public interface to evilive's \"contextual eval\"&reg; facilities.  In a nutshell,
@@ -152,7 +106,7 @@
          b 2}"
   [binds form]
   `(let [~binds ~form]
-     (lexical-context)))
+     (lexical/context)))
 
 ;;
 ;; **Invoke a macro like a function - if you dare!**
@@ -214,12 +168,12 @@
              (T (EVAL NIL-VAL))))
 
   (defn IF [condition T F]
-    (cond (evil (lexical-context)
+    (cond (evil (lexical/context)
                 condition)
-          (evil (lexical-context)
+          (evil (lexical/context)
                 T)
           :default
-          (evil (lexical-context)
+          (evil (lexical/context)
                 F)))
 
   (IF 'true 1 2)

@@ -1,5 +1,5 @@
 (ns evalive.test.core
-  (:use [evalive.core :only (lexical-context evil destro wtfn)] :reload-all)
+  (:use [evalive.core :only (evil destro wtfn)] :reload-all)
   (:use [clojure.test]))
 
 (deftest test-evil-avec-maps
@@ -72,38 +72,6 @@
 
     [1 2] (evil (interleave '[a b] [1 2])
                 '[a b])))
-
-(deftest test-lexical-context
-  (are [L R] (= L R)
-       
-       {}     (lexical-context)
-       
-       '{a 1} (let [a 1]
-                (lexical-context))
-       
-       '{a 1
-         b 2} (let [a 1
-                    b 2]
-                (lexical-context))
-
-        '{a 1
-          b 2
-          c 3} (let [a 1
-                     b 2
-                     c 3]
-                 (lexical-context))
-          
-        '{a 1
-          b 2} (let [a 1]
-                 (let [b 2]
-                   (lexical-context)))
-
-         '{a 1
-           b 2
-           c 3} (let [a 1]
-                  (let [b 2]
-                    (let [c 3]
-                      (lexical-context))))))
 
 (deftest test-destro
   (are [L R] (= L R)
