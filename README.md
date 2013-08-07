@@ -95,6 +95,6 @@ Add the following to your `pom.xml` file:
 
 ## License
 
-Copyright (C) 2011-2012 Fogus
+Copyright (C) 2011-2013 [Fogus](http://www.fogus.me)
 
 Distributed under the Eclipse Public License, the same as Clojure.
