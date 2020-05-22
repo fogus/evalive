@@ -7,3 +7,4 @@ classes
 docs
 *.*~
 target
+.cpcache

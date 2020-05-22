@@ -1,6 +1,8 @@
-(ns evalive.test.core
+(ns evalive-test
   (:use [evalive.core :only (evil destro wtfn)] :reload-all)
   (:use [clojure.test]))
+
+(println "\nTesting with Clojure" (clojure-version))
 
 (deftest test-evil-avec-maps
   (are [L R] (= L R)
