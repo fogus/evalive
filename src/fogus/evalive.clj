@@ -1,15 +1,16 @@
-;; by Fogus - Feb. 9, 2011
+;; by Fogus
 ;;
 ;; <http://github.com/fogus/evalive>
 
-; Copyright (c) Michael Fogus, 2010. All rights reserved.  The use
+; Copyright (c) Michael Fogus, 2010-2025. All rights reserved.  The use
 ; and distribution terms for this software are covered by the Eclipse
 ; Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
 ; which can be found in the file COPYING the root of this
 ; distribution.  By using this software in any fashion, you are
 ; agreeing to be bound by the terms of this license.  You must not
 ; remove this notice, or any other, from this software.
-(ns evalive.core
+
+(ns fogus.evalive
   "Various eval functions and macros."
   (:require [fogus.lexical.chocolate :as lexical]))
 

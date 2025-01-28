@@ -10,7 +10,7 @@ Examples
 --------
 ```clojure
 
-    (use '[evalive.core :only (evil destro wtfn)])
+    (require '[fogus.evalive :refer (evil destro wtfn)])
 ```
 
 ### evil
@@ -73,18 +73,22 @@ Examples
 Including
 ---------
 
+### deps.edn
+
+    fogus/evalive {:mvn/version "1.1.0"}
+
 ### Leiningen
 
 Modify your [Leiningen](http://github.com/technomancy/leiningen) dependencies to include [evalive](http://fogus.me/fun/evalive/):
 
-    :dependencies [[evalive "1.1.0"] ...]    
+    :dependencies [[fogus/evalive "1.1.0"] ...]    
 
 ### Maven
 
 Add the following to your `pom.xml` file:
 
     <dependency>
-      <groupId>evalive</groupId>
+      <groupId>fogus</groupId>
       <artifactId>evalive</artifactId>
       <version>1.1.0</version>
     </dependency>
@@ -95,6 +99,6 @@ Add the following to your `pom.xml` file:
 
 ## License
 
-Copyright (C) 2011-2013 [Fogus](http://www.fogus.me)
+Copyright (C) 2011-2025 [Fogus](http://www.fogus.me)
 
 Distributed under the Eclipse Public License, the same as Clojure.

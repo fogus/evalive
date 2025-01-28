@@ -1,5 +1,5 @@
-(ns evalive-test
-  (:use [evalive.core :only (evil destro wtfn)] :reload-all)
+(ns fogus.evalive-test
+  (:use [fogus.evalive :only (evil destro wtfn)] :reload-all)
   (:use [clojure.test]))
 
 (println "\nTesting with Clojure" (clojure-version))
