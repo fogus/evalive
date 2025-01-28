@@ -2,15 +2,23 @@
  :paths ["src"]
  :deps  {fogus/lexical-chocolate {:mvn/version "0.0.1"}}
 
- :aliases {
-  :test {:extra-deps {io.github.cognitect-labs/test-runner {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
-         :main-opts ["-m" "cognitect.test-runner"]
-         :exec-fn cognitect.test-runner.api/test
-         :extra-paths ["test"]}
-  
-  :build {:deps {io.github.clojure/tools.build {:git/tag "v0.1.3" :git/sha "660a71f"}}
-          :ns-default build}
+ :aliases {:test {:extra-deps {io.github.cognitect-labs/test-runner {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
+                  :main-opts ["-m" "cognitect.test-runner"]
+                  :exec-fn cognitect.test-runner.api/test
+                  :extra-paths ["test"]}
 
-  :dev {:extra-deps {}}
+           :build
+           {:deps {io.github.clojure/tools.build {:git/tag "v0.10.6" :git/sha "52cf7d6"}}
+            :ns-default build}
+
+           :deploy
+           {:extra-deps {slipset/deps-deploy {:mvn/version "RELEASE"}}
+            :exec-fn deps-deploy.deps-deploy/deploy
+            :exec-args {:installer :remote
+                        :sign-releases? true
+                        :sign-key-id "CBBDC7BE00954E2E3A46C80CA3994949855D2816"
+                        :artifact "target/evalive.jar"}}
+           
+           :dev {:extra-deps {}}
   }
  }

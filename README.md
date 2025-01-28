@@ -75,20 +75,20 @@ Including
 
 ### deps.edn
 
-    fogus/evalive {:mvn/version "1.1.0"}
+    me.fogus/evalive {:mvn/version "1.1.0"}
 
 ### Leiningen
 
 Modify your [Leiningen](http://github.com/technomancy/leiningen) dependencies to include [evalive](http://fogus.me/fun/evalive/):
 
-    :dependencies [[fogus/evalive "1.1.0"] ...]    
+    :dependencies [[me.fogus/evalive "1.1.0"] ...]    
 
 ### Maven
 
 Add the following to your `pom.xml` file:
 
     <dependency>
-      <groupId>fogus</groupId>
+      <groupId>me.fogus</groupId>
       <artifactId>evalive</artifactId>
       <version>1.1.0</version>
     </dependency>
