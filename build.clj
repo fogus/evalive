@@ -1,7 +1,7 @@
 (ns build
   (:require [clojure.tools.build.api :as b]))
 
-(def lib 'fogus/evalive)
+(def lib 'me.fogus/evalive)
 ;;(def version (format "0.0.%s" (b/git-count-revs nil)))
 (def version "1.1.1")
 (def class-dir "target/classes")
